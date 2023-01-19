@@ -1,0 +1,27 @@
+.signup_v4 .nav-tabs .nav-link {
+    background: #143250;
+}
+
+.signup_v4 .nav-tabs .nav-link {
+    border: 0;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 0;
+    color: #fff;
+}
+
+.signup_v4 .nav-tabs li.nav-item {
+    width: 50%;
+}
+
+.signup_v4 .card-body {
+    padding: 0px;
+}
+
+.signup_v4 .card-body .tab-content {
+    padding: 0 1.25rem 1.75em;
+}
+.signup_v4 .nav-tabs .nav-link.active {
+    background: #007bff;
+}

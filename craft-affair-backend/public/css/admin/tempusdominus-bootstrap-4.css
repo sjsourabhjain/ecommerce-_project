@@ -1,0 +1,157 @@
+/*@preserve
+ * Tempus Dominus Bootstrap4 v5.1.2 (https://tempusdominus.github.io/bootstrap-4/)
+ * Copyright 2016-2018 Jonathan Peterson
+ * Licensed under MIT (https://github.com/tempusdominus/bootstrap-3/blob/master/LICENSE)
+ */
+
+.bootstrap-datetimepicker-widget{
+   padding: 0 !important;
+   width: 280px;
+   border: none !important;
+   box-shadow: 0 5px 15px 5px rgba(0, 0, 0, 0.2) !important;
+   border-radius: 5px !important;
+   overflow: hidden !important;
+   z-index: 8 !important;
+}
+.bootstrap-datetimepicker-widget > ul{
+   margin: 0;
+   font-size: 15px !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table{
+   width: 100% !important;
+   margin-bottom: 0 !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table th{
+   font-size: 15px !important;
+   padding: 20px 5px !important;
+   text-align: center !important;
+   width: 14.28% !important;
+   vertical-align: middle;
+   border: none !important;
+   background: #fff !important;
+   font-weight: normal !important;
+   line-height: normal !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td{
+   font-size: 15px !important;
+   padding: 12px 5px !important;
+   text-align: center !important;
+   width: 14.28% !important;
+   vertical-align: middle;
+   border: none !important;
+   background: #fff !important;
+   font-weight: 500 !important;
+   line-height: normal !important;
+   cursor: pointer;
+}
+.bootstrap-datetimepicker-widget .datepicker table td span{
+   width: 33.33% !important;
+   display: inline-block !important;
+   padding: 20px 5px !important;
+   text-align: center !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td span.month, .bootstrap-datetimepicker-widget .datepicker table td span.year, .bootstrap-datetimepicker-widget .datepicker table td span.decade{
+   color: #3e3f46 !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td span.month.disabled, .bootstrap-datetimepicker-widget .datepicker table td span.year.disabled, .bootstrap-datetimepicker-widget .datepicker table td span.decade.disabled{
+   opacity: 0.3;
+   pointer-events: none;
+   cursor: default;
+}
+.bootstrap-datetimepicker-widget .datepicker table td span.month.active, .bootstrap-datetimepicker-widget .datepicker table td span.year.active, .bootstrap-datetimepicker-widget .datepicker table td span.decade.active{
+   color: #19CCED !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table thead th{
+   background: none !important;
+   color: #3e3f46 !important;
+   font-weight: bold !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table thead th.picker-switch {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td.today{
+   background: #3e3f46 !important;
+   color: #fff !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td.active{
+   background: #19CCED !important;
+   color: #fff !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td.new, .bootstrap-datetimepicker-widget .datepicker table td.old{
+   opacity: 0.8 !important;
+   color: #3e3f46 !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td.day.disabled{
+   opacity: 0.3 !important;
+   cursor: default;
+   pointer-events: none;
+   color: #3e3f46 !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td.new.today{
+   background: #3e3f46 !important;
+   color: #fff !important;
+}
+.bootstrap-datetimepicker-widget .datepicker table td.day:hover{
+   background: #19CCED !important;
+   color: #fff !important; 
+}
+.bootstrap-datetimepicker-widget .datepicker .picker-switch{
+   cursor: pointer;
+}
+.bootstrap-datetimepicker-widget .datepicker .next, .bootstrap-datetimepicker-widget .datepicker .prev{
+   cursor: pointer;
+   padding: 0 5px !important;
+}
+.bootstrap-datetimepicker-widget .datepicker .next span, .bootstrap-datetimepicker-widget .datepicker .prev span{
+   padding: 15px !important;
+   color: #fff !important;
+   background: #3e3f46 !important;
+   border-radius: 4px !important;
+}
+.bootstrap-datetimepicker-widget ul li.picker-switch table{
+   width: 100% !important;
+   background: #19CCED !important;
+   color: #fff !important; 
+   text-align: center !important;
+}
+.bootstrap-datetimepicker-widget ul li.picker-switch table td{
+   padding: 0 !important;
+}
+.bootstrap-datetimepicker-widget ul li.picker-switch table td a{
+   width: 100% !important;
+   color: #fff !important;
+   padding: 10px !important;
+   font-size: 30px;
+}
+.bootstrap-datetimepicker-widget .timepicker table{
+   width: 100% !important;
+}
+.bootstrap-datetimepicker-widget .timepicker table .btn{
+   min-width: inherit !important;
+   background: none !important;
+   color: #3e3f46 !important; 
+   padding: 10px 5px !important;
+   box-shadow: none !important;
+   border: none !important;
+}
+.bootstrap-datetimepicker-widget .timepicker table .btn:after, .bootstrap-datetimepicker-widget .timepicker table .btn:before{
+   content: none !important;
+}
+.bootstrap-datetimepicker-widget .timepicker table td{
+   text-align: center !important;
+   border: none !important;
+   padding: 20px 5px !important;
+}
+
+@media screen and (max-width: 575px){
+   .bootstrap-datetimepicker-widget{
+      width: 280px;
+   }
+   .bootstrap-datetimepicker-widget .datepicker table td{
+      padding: 10px 5px !important;
+   }
+   .bootstrap-datetimepicker-widget .datepicker table th{
+      padding: 10px 5px;
+   }
+}
