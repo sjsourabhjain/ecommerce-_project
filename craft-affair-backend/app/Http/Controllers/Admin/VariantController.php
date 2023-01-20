@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Variant;
+use DataTables;
 
 class VariantController extends Controller
 {
@@ -20,7 +21,18 @@ class VariantController extends Controller
     public function index(Request $request){
         try{
             $data["variants"] = Variant::latest()->get();
-            return view('admin.variants.list_variants',$data);
+            if ($request->ajax()) {
+                return Datatables::of($data["variants"])
+                        ->addIndexColumn()
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.show_variant',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_variant',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            return $btn;
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
+            }
+            return view('admin.variants.list_variants');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

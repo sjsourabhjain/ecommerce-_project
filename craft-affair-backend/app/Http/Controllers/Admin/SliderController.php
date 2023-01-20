@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Slider;
+use DataTables;
 
 class SliderController extends Controller
 {
@@ -20,7 +21,28 @@ class SliderController extends Controller
     public function index(Request $request){
         try{
             $data["sliders"] = Slider::latest()->get();
-            return view('admin.sliders.list_sliders',$data);
+            if ($request->ajax()) {
+                return Datatables::of($data["sliders"])
+                        ->addIndexColumn()
+                        ->addColumn('image_name', function($row){
+                            return "<img height='100' width='100' src='".asset("uploads/".$row["image_name"])."'>";
+                        })
+                        ->addColumn('status', function($row){
+                            if($row["status"]==1){
+                                return '<a href="'.route("admin.update_slider_status",$row['id']).'"><span class="badge badge-success">Active</span></a>';
+                            }else{
+                                return '<a href="'.route("admin.update_slider_status",$row['id']).'"><span class="badge badge-warning">Inactive</span></a>';
+                            }
+                        })
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.edit_slider',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.delete_slider',$row['id']) .'"><button type="button" class="icon-btn delete"><i class="fal fa-trash"></i></button></a>';
+                            return $btn;
+                        })
+                        ->rawColumns(['image_name','status','action'])
+                        ->make(true);
+            }
+            return view('admin.sliders.list_sliders');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

@@ -71,7 +71,6 @@ function Header(){
                             {
                                 userState!=null && userState.isLoggedIn ? "" :  (<Link to={routeConstants.LOGIN_REGISTRATION_PAGE}>Sign in</Link>)
                             }
-                            <Link to={routeConstants.MYLAYOUT}>FAQs</Link>
                         </div>
                     </div>
                     <div className="offcanvas__nav__option">

@@ -58,11 +58,6 @@
                                                             </button>
                                                         </a>
                                                         @endif
-                                                    <!-- <a href="{{ url('admin/delete-user',$user->id) }}">
-                                                        <button type="button" class="icon-btn delete">
-                                                            <i class="fal fa-times"></i>
-                                                        </button>
-                                                    </a>-->
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -76,3 +71,18 @@
             </div>
         </div>
 @endsection
+@push('current-page-js')
+<script type="text/javascript">
+    var table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.list_user') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'mob_no', name: 'mob_no'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
+        ]
+    });
+</script>
+@endpush

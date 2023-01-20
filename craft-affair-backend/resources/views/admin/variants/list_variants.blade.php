@@ -59,3 +59,17 @@
             </div>
         </div>
 @endsection
+@push('current-page-js')
+<script type="text/javascript">
+    var table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.list_variant') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'name', name: 'name'},
+            {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
+        ]
+    });
+</script>
+@endpush

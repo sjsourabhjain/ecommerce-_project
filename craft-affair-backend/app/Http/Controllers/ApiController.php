@@ -429,6 +429,33 @@ class ApiController extends Controller
             ]);
         }     
     }
+
+    public function categoryImageList(Request $request){
+        try{
+            $categoryImageList = Category::select('category_name','category_image')->latest()->get(); 
+            /*foreach ($categoryImageList as $key => $value) {
+                $categoryImage[$key]['name'] = $value->category_name;
+                $categoryImage[$key]['image'] = asset($value->category_image);
+            }*/
+            return response()->json([
+                'status' => true,
+                'message' => 'Category fetch successfully.',
+                'data'=>$categoryImageList
+            ]);
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => ERROR_MSG,
+                'data'=>[]
+            ]);
+        }
+    }
+
+    public function biggestDealProduct(Request $request){
+        
+    }
+
     public function productList(Request $request){
         try{
             $products = Product::with("images","variant_combinations")->latest()->get();
@@ -491,6 +518,7 @@ class ApiController extends Controller
             ]);
         }     
     }
+    
     public function getProductByCategoryId(request $request){
         $validator = Validator::make($request->all(),[
             'category_id'     => 'required|numeric'
@@ -618,6 +646,7 @@ class ApiController extends Controller
             ]);
         }
     }
+    
     public function getProductById(request $request){
         $validator = Validator::make($request->all(),[
             'product_id'     => 'required|numeric'
@@ -706,6 +735,7 @@ class ApiController extends Controller
             ]);
         }
     }
+    
     public function userProfile(Request $request){
         $validator = Validator::make($request->all(),[
             'user_id' => 'required|numeric'

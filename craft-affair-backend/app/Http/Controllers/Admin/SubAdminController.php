@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use App\Models\Country;
+use DataTables;
 use Hash;
 use DB;
 
@@ -28,10 +29,29 @@ class SubAdminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(){
+    public function index(Request $request){
         try{
-            $data["sub_admins"] = User::where(["role_id"=>"2"])->latest()->get();
-            return view('admin.sub_admin.list_sub_admin',$data);
+            $data["sub_admins"] = User::where(["role_id"=>2])->latest()->get();
+            if ($request->ajax()) {
+                return Datatables::of($data["sub_admins"])
+                        ->addIndexColumn()
+                        ->addColumn('status', function($row){
+                            if($row["status"]==1){
+                                return '<a href="'.route("admin.update_sub_admin_status",$row['id']).'"><span class="badge badge-success">Active</span></a>';
+                            }else{
+                                return '<a href="'.route("admin.update_sub_admin_status",$row['id']).'"><span class="badge badge-warning">Inactive</span></a>';
+                            }
+                        })
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.show_sub_admin',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_sub_admin',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+
+                            return $btn;
+                        })
+                        ->rawColumns(['status','action'])
+                        ->make(true);
+            }
+            return view('admin.sub_admin.list_sub_admin');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error','Something went wrong.');
         }

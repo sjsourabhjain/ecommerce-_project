@@ -13,6 +13,7 @@ use App\Models\ProductImage;
 use App\Models\ProductVariantImage;
 use App\Models\ProductVariantCombination;
 use App\Models\ProductVariantCombinationDetails;
+use DataTables;
 
 class ProductController extends Controller
 {
@@ -27,7 +28,18 @@ class ProductController extends Controller
     public function index(Request $request){
         try{
             $data["products"] = Product::latest()->get();
-            return view('admin.products.list_product',$data);
+            if ($request->ajax()) {
+                return Datatables::of($data["products"])
+                        ->addIndexColumn()
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.show_product',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_product',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            return $btn;
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
+            }
+            return view('admin.products.list_product');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

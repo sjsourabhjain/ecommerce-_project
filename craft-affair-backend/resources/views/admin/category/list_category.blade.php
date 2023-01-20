@@ -63,3 +63,19 @@
             </div>
         </div>
 @endsection
+@push('current-page-js')
+<script type="text/javascript">
+    var table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.list_category') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'category_name', name: 'category_name'},
+            {data: 'parent_id', name: 'parent_id'},
+            {data: 'category_image', name: 'category_image'},
+            {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
+        ]
+    });
+</script>
+@endpush

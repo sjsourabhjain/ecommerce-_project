@@ -16,12 +16,12 @@
 <input type="hidden" value="virendra_commit-20-dec-2021:11:33">
 <script>
 
-$(document).ready(function(){
+/*$(document).ready(function(){
     $('#dataTable').DataTable({
         dom: 'Plfrtip',
         stateSave: true
     });
-});
+});*/
 const today = new Date();
 
 $(function(){

@@ -66,3 +66,18 @@
             </div>
         </div>
 @endsection
+@push('current-page-js')
+<script type="text/javascript">
+    var table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.list_product') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'product_name', name: 'product_name'},
+            {data: 'product_sku_id', name: 'product_sku_id'},
+            {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
+        ]
+    });
+</script>
+@endpush

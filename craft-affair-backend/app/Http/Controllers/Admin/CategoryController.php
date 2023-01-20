@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+use DataTables;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,27 @@ class CategoryController extends Controller
     public function index(Request $request){
         try{
             $data["categories"] = Category::with("parent_category")->latest()->get();
-            return view('admin.category.list_category',$data);
+            if ($request->ajax()) {
+                return Datatables::of($data["categories"])
+                        ->addIndexColumn()
+                        ->addColumn('parent_id', function($row){
+                            if($row["parent_id"]==0){
+                                return "";
+                            }
+                            return $row->parent_category->category_name;
+                        })
+                        ->addColumn('category_image', function($row){
+                            return "<img height='100' width='100' src='".asset("uploads/".$row["category_image"])."'>";
+                        })
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.show_category',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_category',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+                            return $btn;
+                        })
+                        ->rawColumns(['category_image','action'])
+                        ->make(true);
+            }
+            return view('admin.category.list_category');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }

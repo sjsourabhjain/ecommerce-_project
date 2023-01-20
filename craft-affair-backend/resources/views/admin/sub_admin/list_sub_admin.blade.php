@@ -76,3 +76,19 @@
             </div>
         </div>
 @endsection
+@push('current-page-js')
+<script type="text/javascript">
+    var table = $('#dataTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.list_sub_admin') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'full_name', name: 'full_name'},
+            {data: 'email', name: 'email'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', className: 'action', orderable: false, searchable: false},
+        ]
+    });
+</script>
+@endpush

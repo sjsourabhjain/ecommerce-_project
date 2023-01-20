@@ -26,6 +26,7 @@ Route::post('login',[ApiController::class,'login']);
 Route::get('list-settings',[ApiController::class,'get_settings']);
 Route::get('list-slider',[ApiController::class,'sliderList']);
 Route::get('list-category',[ApiController::class,'categoryList']);
+Route::get('list-category-image',[ApiController::class,'categoryImageList']);
 Route::get('list-product',[ApiController::class,'productList']);
 Route::post('cart-details',[ApiController::class,'store_cart_details']);
 Route::post('list-product-by-category-id',[ApiController::class,'getProductByCategoryId']);

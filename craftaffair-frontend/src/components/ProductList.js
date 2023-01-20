@@ -165,18 +165,11 @@ function ProductList(){
                     <div className="row">
                         {
                             products && products.length>0 && products.map((product,i)=>(
-                                <div className="col-lg-4 col-md-6 col-sm-6" key={i}>
+                                <div className="col-lg-4 col-md-6 col-sm-6 categoryProduct" key={i}>
                                     <Link to={routeConstants.PRODUCT_DETAILS_PAGE + '/'+product.product_id} className="product__item">
                                         <img className="img-responsive" src={product.image_url} /> 
                                         <div className="product__item__text">
                                             <h6>{product.product_name}</h6>
-                                            <div className="rating">
-                                                <i className="fa fa-star-o"></i>
-                                                <i className="fa fa-star-o"></i>
-                                                <i className="fa fa-star-o"></i>
-                                                <i className="fa fa-star-o"></i>
-                                                <i className="fa fa-star-o"></i>
-                                            </div>
                                             <h5>&#8377;{product.price}</h5>
                                         </div>
                                     </Link>

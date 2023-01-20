@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Country;
+use DataTables;
 use Helper;
 use Hash;
 use DB;
@@ -45,7 +46,26 @@ class UserController extends Controller
     public function index(Request $request){
         try{
             $data["users"] = User::where('role_id',4)->latest()->get();
-            return view('admin.user.list_user',$data);
+            if ($request->ajax()) {
+                return Datatables::of($data["users"])
+                        ->addIndexColumn()
+                        ->addColumn('status', function($row){
+                            if($row["status"]==1){
+                                return '<a href="'.route("admin.update_user_status",$row['id']).'"><span class="badge badge-success">Active</span></a>';
+                            }else{
+                                return '<a href="'.route("admin.update_user_status",$row['id']).'"><span class="badge badge-warning">Inactive</span></a>';
+                            }
+                        })
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('admin.show_user',$row['id']).'"><button type="button" class="icon-btn preview"><i class="fal fa-eye"></i></button></a>';
+                            $btn .= '<a href="'.route('admin.edit_user',$row['id']) .'"><button type="button" class="icon-btn edit"><i class="fal fa-edit"></i></button></a>';
+
+                            return $btn;
+                        })
+                        ->rawColumns(['status','action'])
+                        ->make(true);
+            }
+            return view('admin.user.list_user');
         }catch(\Exception $e){
             return redirect()->route('admin.dashboard')->with('error',ERROR_MSG);
         }
